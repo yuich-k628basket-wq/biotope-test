@@ -1,205 +1,56 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>2級ビオトープ計画管理士 練習テスト（択一50問）</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-      background: #f5f5f5;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 20px 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .question {
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0 15px;
-    }
-    .question:last-child {
-      border-bottom: none;
-    }
-    .question-title {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-    .options label {
-      margin-right: 12px;
-      display: inline-block;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-    .result.ok {
-      background: #e3f7e3;
-      color: #146314;
-    }
-    .result.ng {
-      background: #ffecec;
-      color: #a30000;
-    }
-    .btn-area {
-      text-align: center;
-      margin-top: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      background: #0070f3;
-      color: #fff;
-    }
-    button:hover {
-      background: #0059c1;
-    }
-    .detail {
-      margin-top: 10px;
-      font-size: 14px;
-      white-space: pre-wrap;
-    }
-    .correct {
-      color: #146314;
-      font-weight: bold;
-    }
-    .incorrect {
-      color: #a30000;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>ビオトープ管理士2級 オリジナル50問テスト</title>
+<style>
+body { font-family: sans-serif; background:#f5f5f5; margin:20px; }
+.container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
+h1, h2 { text-align:center; }
+.question { border-bottom:1px solid #ddd; padding:15px 0; }
+.options label { display:block; margin:4px 0; }
+button { padding:10px 20px; font-size:16px; margin-top:20px; cursor:pointer; }
+.result { margin-top:20px; padding:15px; border-radius:6px; font-weight:bold; }
+.ok { background:#e3f7e3; color:#146314; }
+.ng { background:#ffecec; color:#a30000; }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>2級ビオトープ計画管理士 練習テスト</h1>
-    <h2>択一50問（番号＋選択肢のみ）</h2>
-    <p>
-      ※実際の問題文は著作権の関係で掲載していません。<br>
-      手元の問題用紙を見ながら、「問番号」と「選択肢番号（1〜5）」だけをここで回答してください。
-    </p>
+<div class="container">
+<h1>ビオトープ管理士2級</h1>
+<h2>オリジナル50問テスト</h2>
 
-    <div id="questions"></div>
+<div id="questions"></div>
 
-    <div class="btn-area">
-      <button id="submitBtn">採点する</button>
-    </div>
+<button onclick="grade()">採点する</button>
 
-    <div id="result" class="result" style="display:none;"></div>
-    <div id="detail" class="detail"></div>
-  </div>
+<div id="result" class="result" style="display:none;"></div>
+<div id="detail" style="white-space:pre-wrap; margin-top:10px;"></div>
+</div>
 
-  <script>
-    // 2級ビオトープ計画管理士（通常受験・択一50問）の正解
-    // PDF「2級ビオトープ計画管理士 択一問題·小論文 通常受験·他部門受験」の表より
-    // 1〜50問の正解番号（1〜5）
-    const correctAnswers = [
-      5, 1, 5, 3, 5, 3, 1, 2, 4, 4,
-      3, 4, 3, 4, 2, 3, 2, 4, 5, 1,
-      2, 2, 4, 1, 5, 4, 1, 1, 5, 2,
-      3, 4, 5, 1, 1, 2, 4, 4, 2, 4,
-      3, 2, 4, 2, 1, 2, 5, 5, 1, 5
-    ];
+<script>
+// ====== ここに50問の問題文と正解を定義 ======
+const quiz = [
+{q:"生態系における「キーストーン種」の説明として最も適切なのはどれか。",
+o:["個体数が最も多い種","生態系に大きな影響を与える種","外来種として侵入しやすい種","遷移初期にのみ見られる種","生態系サービスを提供しない種"],a:2},
+{q:"ロジスティック成長で成長が鈍化する理由はどれか。",
+o:["捕食者の減少","環境収容力に近づくため","遺伝的多様性の増加","気温の上昇","寿命が延びるため"],a:2},
+{q:"ビオトープの基本的な考え方として適切なのはどれか。",
+o:["人間利用最優先","特定種のみ保護","生物の生息・生育に配慮","装飾目的の庭園","完全放置区域"],a:3},
+{q:"ビオトープネットワーク形成で重要な要素はどれか。",
+o:["移動阻害構造物の増加","孤立緑地の増加","コリドーによる連結","外来種導入","舗装率増加"],a:3},
+{q:"外来生物法で特定外来生物に指定されるとどうなるか。",
+o:["飼育・栽培・運搬・販売が禁止","国が必ず駆除","市町村が保護計画作成","研究利用が自由","自然公園内のみ規制"],a:1},
+{q:"環境影響評価法の目的として適切なのはどれか。",
+o:["迅速な許可","経済効果算定","環境影響の予測・評価","モニタリング免除","利益最大化"],a:3},
+{q:"緑地計画における「エッジ効果」とはどれか。",
+o:["端部で多様性低下","端部で多様性上昇","端部が侵食","外来種侵入","乾燥しやすい"],a:2},
+{q:"都市部ビオトープで重要な視点はどれか。",
+o:["人口密度最大化","生物の移動経路確保","建物高さ均一化","道路幅拡大","公園舗装"],a:2},
+{q:"遷移の進行で一般的に見られる傾向はどれか。",
+o:["種数減少","生産量減少","土壌が肥沃に","光環境が明るく","pioneer種増加"],a:3},
+{q:"アダプティブマネジメントの特徴はどれか。",
+o:["計画を変更しない","経験のみで判断","モニタリングで調整","コスト最優先","外来種導入"],a:3},
 
-    const totalQuestions = correctAnswers.length;
-
-    function createQuestions() {
-      const container = document.getElementById('questions');
-
-      for (let i = 0; i < totalQuestions; i++) {
-        const qNum = i + 1;
-        const qDiv = document.createElement('div');
-        qDiv.className = 'question';
-
-        const title = document.createElement('div');
-        title.className = 'question-title';
-        title.textContent = `問${qNum}`;
-
-        const note = document.createElement('div');
-        note.style.fontSize = '13px';
-        note.style.color = '#555';
-        note.textContent = '手元の問題用紙の「問' + qNum + '」を見て、正しいと思う選択肢番号（1〜5）を選んでください。';
-
-        const optionsDiv = document.createElement('div');
-        optionsDiv.className = 'options';
-
-        for (let opt = 1; opt <= 5; opt++) {
-          const label = document.createElement('label');
-          const input = document.createElement('input');
-          input.type = 'radio';
-          input.name = 'q' + qNum;
-          input.value = opt;
-          label.appendChild(input);
-          label.appendChild(document.createTextNode(' ' + opt));
-          optionsDiv.appendChild(label);
-        }
-
-        qDiv.appendChild(title);
-        qDiv.appendChild(note);
-        qDiv.appendChild(optionsDiv);
-        container.appendChild(qDiv);
-      }
-    }
-
-    function grade() {
-      let score = 0;
-      let unanswered = 0;
-      let detailText = '';
-
-      for (let i = 0; i < totalQuestions; i++) {
-        const qNum = i + 1;
-        const radios = document.getElementsByName('q' + qNum);
-        let selected = null;
-
-        for (const r of radios) {
-          if (r.checked) {
-            selected = parseInt(r.value, 10);
-            break;
-          }
-        }
-
-        const correct = correctAnswers[i];
-
-        if (selected === null) {
-          unanswered++;
-          detailText += `問${qNum}: 未回答（正解: ${correct}）\n`;
-        } else if (selected === correct) {
-          score++;
-          detailText += `問${qNum}: ✅ 正解 ${selected}\n`;
-        } else {
-          detailText += `問${qNum}: ❌ 不正解（あなた: ${selected} / 正解: ${correct}）\n`;
-        }
-      }
-
-      const resultDiv = document.getElementById('result');
-      const detailDiv = document.getElementById('detail');
-      const percent = Math.round((score / totalQuestions) * 100);
-
-      resultDiv.style.display = 'block';
-      resultDiv.className = 'result ' + (percent >= 60 ? 'ok' : 'ng');
-      resultDiv.textContent =
-        `得点: ${score} / ${totalQuestions}（${percent}%） ` +
-        `(未回答: ${unanswered} 問) ` +
-        (percent >= 60 ? '→ 合格ライン目安クリア（仮）' : '→ もう一度復習しましょう');
-
-      detailDiv.textContent = detailText;
-    }
-
-    document.getElementById('submitBtn').addEventListener('click', grade);
-
-    // 初期表示で設問を生成
-    createQuestions();
-  </script>
-</body>
-</html>
+// ====== 残り40問（問11〜問50） ======
+{q:"一次生産者の主な働きはどれか。",o:["分解","
