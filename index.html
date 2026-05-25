@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ビオトープ管理士2級 オリジナル50問テスト</title>
+<style>
+body { font-family: sans-serif; background:#f5f5f5; margin:20px; }
+.container { max-width:900px; margin:auto; background:#fff; padding:20px; border-radius:8px; }
+h1, h2 { text-align:center; }
+.question { border-bottom:1px solid #ddd; padding:15px 0; }
+.options label { display:block; margin:4px 0; }
+button { padding:10px 20px; font-size:16px; margin-top:20px; cursor:pointer; }
+.result { margin-top:20px; padding:15px; border-radius:6px; font-weight:bold; }
+.ok { background:#e3f7e3; color:#146314; }
+.ng { background:#ffecec; color:#a30000; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>ビオトープ管理士2級</h1>
+<h2>オリジナル50問テスト</h2>
+
+<div id="questions"></div>
+
+<button onclick="grade()">採点する</button>
+
+<div id="result" class="result" style="display:none;"></div>
+<div id="detail" style="white-space:pre-wrap; margin-top:10px;"></div>
+</div>
+
+<script>
+// ====== ここに50問の問題文と正解を定義 ======
+const quiz = [
+{q:"生態系における「キーストーン種」の説明として最も適切なのはどれか。",
+o:["個体数が最も多い種","生態系に大きな影響を与える種","外来種として侵入しやすい種","遷移初期にのみ見られる種","生態系サービスを提供しない種"],a:2},
+{q:"ロジスティック成長で成長が鈍化する理由はどれか。",
+o:["捕食者の減少","環境収容力に近づくため","遺伝的多様性の増加","気温の上昇","寿命が延びるため"],a:2},
+{q:"ビオトープの基本的な考え方として適切なのはどれか。",
+o:["人間利用最優先","特定種のみ保護","生物の生息・生育に配慮","装飾目的の庭園","完全放置区域"],a:3},
+{q:"ビオトープネットワーク形成で重要な要素はどれか。",
+o:["移動阻害構造物の増加","孤立緑地の増加","コリドーによる連結","外来種導入","舗装率増加"],a:3},
+{q:"外来生物法で特定外来生物に指定されるとどうなるか。",
+o:["飼育・栽培・運搬・販売が禁止","国が必ず駆除","市町村が保護計画作成","研究利用が自由","自然公園内のみ規制"],a:1},
+{q:"環境影響評価法の目的として適切なのはどれか。",
+o:["迅速な許可","経済効果算定","環境影響の予測・評価","モニタリング免除","利益最大化"],a:3},
+{q:"緑地計画における「エッジ効果」とはどれか。",
+o:["端部で多様性低下","端部で多様性上昇","端部が侵食","外来種侵入","乾燥しやすい"],a:2},
+{q:"都市部ビオトープで重要な視点はどれか。",
+o:["人口密度最大化","生物の移動経路確保","建物高さ均一化","道路幅拡大","公園舗装"],a:2},
+{q:"遷移の進行で一般的に見られる傾向はどれか。",
+o:["種数減少","生産量減少","土壌が肥沃に","光環境が明るく","pioneer種増加"],a:3},
+{q:"アダプティブマネジメントの特徴はどれか。",
+o:["計画を変更しない","経験のみで判断","モニタリングで調整","コスト最優先","外来種導入"],a:3},
+
+// ====== 残り40問（問11〜問50） ======
+{q:"一次生産者の主な働きはどれか。",o:["分解","
